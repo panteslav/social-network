@@ -1,0 +1,12 @@
+.container {
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+h3 {
+  color: white;
+  font-size: 30px;
+}

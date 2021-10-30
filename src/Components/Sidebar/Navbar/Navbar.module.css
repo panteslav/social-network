@@ -1,0 +1,21 @@
+@import '../../../index.css';
+
+.list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.item {
+    padding: 5px 0px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.item a {
+    color: var(--main-color-dark);
+    text-decoration: none;
+}
+
+.item a.active {
+    color: yellow;
+}

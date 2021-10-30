@@ -1,25 +1,56 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Components/Header/Header';
+import Sidebar from './Components/Sidebar/Sidebar';
+import ProfileContainer from './Components/Profile/ProfileContainer';
+import DialogsContainer from './Components/Dialogs/DialogsContainer';
+import UsersContainer from './Components/Users/UsersContainer';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import store from './Redux';
+import Login from './Components/Login/Login';
+import React from 'react';
+import { connect } from 'react-redux';
+import Preloader from './Components/Common/Preloader';
+import { initializeApp } from './Redux/appReducer';
+import { getInitializationStatus } from './Redux/appSelectors';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    componentDidMount() {
+        this.props.initializeApp();
+    }
+
+    render() {
+        if (!this.props.isInitialized) {
+            return <Preloader />;
+        }
+
+        return (
+            <BrowserRouter>
+                <div className="app-wrapper">
+                    <Header />
+                    <Sidebar />
+                    <div className="app-wrapper-content">
+                        <Switch>
+                            <Route
+                                path="/profile/:userId?"
+                                render={({ match }) => (
+                                    <ProfileContainer key={match.params.userId} />
+                                )}
+                            />
+                            <Route path="/dialogs" render={() => <DialogsContainer />} />
+                            <Route path="/users" render={() => <UsersContainer />} />
+                            <Route path="/login" render={() => <Login />} />
+                        </Switch>
+                    </div>
+                    <footer>footer</footer>
+                </div>
+            </BrowserRouter>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+    isInitialized: getInitializationStatus(state),
+    // sidebar:
+});
+
+export default connect(mapStateToProps, { initializeApp })(App);

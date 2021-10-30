@@ -1,0 +1,10 @@
+@import './../../index.css';
+
+.side {
+    grid-area: s;
+    background-color: var(--additional-color-light);
+    min-width: 100px;
+    padding: 20px 20px 20px 40px;
+    color: red;
+    /* font-size: 1.4; */
+}

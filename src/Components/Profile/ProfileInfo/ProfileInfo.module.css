@@ -1,0 +1,17 @@
+.image {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.avatar {
+    max-width: 100px;
+}
+
+.avatar img {
+    max-width: 100%;
+}
+
+.container {
+    padding: 10px;
+}

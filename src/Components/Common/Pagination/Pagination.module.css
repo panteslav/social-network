@@ -1,0 +1,14 @@
+.container {
+    color: white;
+    text-align: center;
+}
+
+.item {
+    font-size: 20px;
+    cursor: pointer;
+    padding-left: 5px;
+}
+
+.itemActive {
+    font-weight: bold;
+}
