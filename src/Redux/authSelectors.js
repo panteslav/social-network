@@ -1,4 +1,4 @@
-export const getUserId = (state) => state.auth.userId;
+export const getAuthUserId = (state) => state.auth.userId;
 
 export const getAuthStatus = (state) => state.auth.isAuth;
 

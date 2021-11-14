@@ -18,7 +18,7 @@ import {
     getProfileStatus,
     getFollowStatus,
 } from '../../Redux/profileSelectors';
-import { getUserId } from '../../Redux/authSelectors';
+import { getAuthUserId } from '../../Redux/authSelectors';
 import { getIdsToToggleFollow } from '../../Redux/usersSelectors';
 
 class ProfileContainer extends React.Component {
@@ -57,7 +57,7 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        userId: getUserId(state),
+        userId: getAuthUserId(state),
         posts: getPosts(state),
         profileData: getProfileData(state),
         profileStatus: getProfileStatus(state),

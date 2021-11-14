@@ -3,7 +3,7 @@ import styles from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logOut } from '../../Redux/authReducer';
-import { getAuthStatus, getLogin, getUserId } from '../../Redux/authSelectors';
+import { getAuthStatus, getLogin, getAuthUserId } from '../../Redux/authSelectors';
 
 const Header = ({ isAuth, userId, login, logOut }) => {
     return (
@@ -28,7 +28,7 @@ const Header = ({ isAuth, userId, login, logOut }) => {
 
 const mapStateToProps = (state) => ({
     isAuth: getAuthStatus(state),
-    userId: getUserId(state),
+    userId: getAuthUserId(state),
     login: getLogin(state),
 });
 

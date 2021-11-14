@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getAuthUserId } from '../../Redux/authSelectors';
 
-const ProfileStatus = ({ status, updateProfileStatus }) => {
+const ProfileStatus = ({ userId, status, updateProfileStatus }) => {
+    const authUserId = useSelector(getAuthUserId);
+
     const [isBeingEdited, setIsBeingEdited] = useState(false);
     const [statusBuffer, setStatusBuffer] = useState(status);
+    const isEditable = userId === authUserId;
 
     const activateEditMode = () => {
         setIsBeingEdited(true);
@@ -19,7 +24,7 @@ const ProfileStatus = ({ status, updateProfileStatus }) => {
     };
 
     return (
-        <div onDoubleClick={activateEditMode} onBlur={deactivateEditMode}>
+        <div onDoubleClick={isEditable ? activateEditMode : null} onBlur={deactivateEditMode}>
             {isBeingEdited ? (
                 <div>
                     <input

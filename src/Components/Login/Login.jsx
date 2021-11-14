@@ -3,7 +3,7 @@ import { Form, Field } from 'react-final-form';
 import { logIn } from '../../Redux/authReducer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { getAuthStatus, getUserId } from '../../Redux/authSelectors';
+import { getAuthStatus, getAuthUserId } from '../../Redux/authSelectors';
 
 const required = (value) => (value ? undefined : 'Required field');
 const maxLength = (maxLength) => (value) => {
@@ -100,7 +100,7 @@ const Login = ({ isAuth, userId, logIn }) => {
 
 const mapStateToProps = (state) => ({
     isAuth: getAuthStatus(state),
-    userId: getUserId(state),
+    userId: getAuthUserId(state),
 });
 
 export default connect(mapStateToProps, { logIn })(Login);
