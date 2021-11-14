@@ -11,7 +11,7 @@ const User = ({
     location,
     followed,
     photos,
-    toggleFollow,
+    toggleUserFollow,
     idsToToggleFollow,
 }) => {
     // const sendToggleFollowRequest = (followed) => {
@@ -47,7 +47,7 @@ const User = ({
                         followed={followed}
                         id={id}
                         idsToToggleFollow={idsToToggleFollow}
-                        toggleFollow={toggleFollow}
+                        toggleFollow={toggleUserFollow}
                     />
                 </div>
             </div>

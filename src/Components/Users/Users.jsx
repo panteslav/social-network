@@ -8,7 +8,7 @@ const Users = ({
     currentPageNumber,
     totalUsersCount,
     idsToToggleFollow,
-    toggleFollow,
+    toggleUserFollow,
     onPageChange,
 }) => {
     const usersItems = users.map(({ id, name, status, location, followed, photos }) => {
@@ -21,7 +21,7 @@ const Users = ({
                 followed={followed}
                 photos={photos}
                 idsToToggleFollow={idsToToggleFollow}
-                toggleFollow={toggleFollow}
+                toggleUserFollow={toggleUserFollow}
             ></User>
         );
     });

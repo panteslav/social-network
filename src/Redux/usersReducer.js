@@ -129,18 +129,19 @@ export const removeIdFromToggleList = (id) => {
     };
 };
 
-export const toggleFollow = (followed, id) => {
+export const toggleFollow = (toggleFollowStatus, followed, id) => {
     return (dispatch) => {
         dispatch(addIdToToggleList(id));
         usersAPI.sendToggleFollowRequest(followed, id).then((response) => {
             if (response.data.resultCode === 0) {
                 dispatch(toggleFollowStatus(id));
-                dispatch(requestFriends());
             }
             dispatch(removeIdFromToggleList(id));
         });
     };
 };
+
+export const toggleUserFollow = toggleFollow.bind(null, toggleFollowStatus);
 
 //Friends
 export const setFriends = (friends) => ({

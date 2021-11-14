@@ -1,11 +1,13 @@
 import profileAPI from '../APIs/profileAPI';
 import usersAPI from '../APIs/usersAPI';
+import { toggleFollow } from './usersReducer';
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 const UPDATE_PROFILE_STATUS = 'UPDATE_PROFILE_STATUS';
 const SET_FOLLOW_STATUS = 'SET_FOLLOW_STATUS';
+const TOGGLE_FOLLOW_STATUS = 'TOGGLE_FOLLOW_STATUS';
 
 const initialState = {
     posts: [],
@@ -15,6 +17,7 @@ const initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
+        //Posts
         case ADD_POST: {
             const newPost = {
                 id: state.posts.length + 1,
@@ -27,6 +30,7 @@ const profileReducer = (state = initialState, action) => {
             };
         }
 
+        //Profile
         case SET_USER_PROFILE: {
             return {
                 ...state,
@@ -34,6 +38,7 @@ const profileReducer = (state = initialState, action) => {
             };
         }
 
+        //Status
         case SET_PROFILE_STATUS: {
             return {
                 ...state,
@@ -48,10 +53,18 @@ const profileReducer = (state = initialState, action) => {
             };
         }
 
+        //Follow
         case SET_FOLLOW_STATUS: {
             return {
                 ...state,
                 followStatus: action.isFollowed,
+            };
+        }
+
+        case TOGGLE_FOLLOW_STATUS: {
+            return {
+                ...state,
+                followStatus: !state.followStatus,
             };
         }
 
@@ -60,8 +73,10 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
+//Posts
 export const addPost = (body) => ({ type: ADD_POST, body });
 
+//Profile
 export const setUserProfile = (profileData) => ({ type: SET_USER_PROFILE, profileData });
 
 export const setProfileStatus = (status) => ({ type: SET_PROFILE_STATUS, status });
@@ -74,6 +89,7 @@ export const requestUserProfile = (userId) => {
     };
 };
 
+//Status
 export const requestProfileStatus = (userId) => {
     return (dispatch) => {
         profileAPI.getProfileStatus(userId).then((response) => {
@@ -94,6 +110,7 @@ export const updateProfileStatus = (status) => {
     };
 };
 
+//Follow
 export const setFollowStatus = (isFollowed) => {
     return {
         type: SET_FOLLOW_STATUS,
@@ -105,11 +122,18 @@ export const requestFollowStatus = (id) => {
     return (dispatch) => {
         profileAPI.getFollowStatus(id).then((response) => {
             if (response.status === 200) {
-                debugger;
                 dispatch(setFollowStatus(response.data));
             } else console.log('Bad server response.');
         });
     };
 };
+
+export const toggleFollowStatus = () => {
+    return {
+        type: TOGGLE_FOLLOW_STATUS,
+    };
+};
+
+export const toggleProfileFollow = toggleFollow.bind(null, toggleFollowStatus);
 
 export default profileReducer;

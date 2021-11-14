@@ -13,7 +13,6 @@ const Profile = (props) => {
                 followed={props.followed}
                 idsToToggleFollow={props.idsToToggleFollow}
                 toggleFollow={props.toggleFollow}
-                requestFollowStatus={props.requestFollowStatus}
             />
             <MyPosts addPost={props.addPost} posts={props.posts} />
         </div>

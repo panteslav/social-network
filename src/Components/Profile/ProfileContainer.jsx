@@ -8,7 +8,7 @@ import {
     updateProfileStatus,
     requestFollowStatus,
 } from '../../Redux/profileReducer';
-import { toggleFollow } from '../../Redux/usersReducer';
+import { toggleProfileFollow } from '../../Redux/profileReducer';
 import { withRouter } from 'react-router-dom';
 import withAuthRedirect from '../../HOCs/withAuthRedirect';
 import { compose } from 'redux';
@@ -49,8 +49,7 @@ class ProfileContainer extends React.Component {
                 updateProfileStatus={this.props.updateProfileStatus}
                 followed={this.props.followed}
                 idsToToggleFollow={this.props.idsToToggleFollow}
-                toggleFollow={this.props.toggleFollow}
-                requestFollowStatus={this.props.requestFollowStatus}
+                toggleFollow={this.props.toggleProfileFollow}
             />
         );
     }
@@ -74,7 +73,7 @@ export default compose(
         requestUserProfile,
         requestProfileStatus,
         requestFollowStatus,
-        toggleFollow,
+        toggleProfileFollow,
     }),
     // withAuthRedirect,
     withRouter,
