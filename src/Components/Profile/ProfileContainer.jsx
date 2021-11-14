@@ -7,10 +7,10 @@ import {
     requestProfileStatus,
     updateProfileStatus,
     requestFollowStatus,
+    toggleProfileFollow,
 } from '../../Redux/profileReducer';
-import { toggleProfileFollow } from '../../Redux/profileReducer';
+
 import { withRouter } from 'react-router-dom';
-import withAuthRedirect from '../../HOCs/withAuthRedirect';
 import { compose } from 'redux';
 import {
     getPosts,
@@ -75,6 +75,5 @@ export default compose(
         requestFollowStatus,
         toggleProfileFollow,
     }),
-    // withAuthRedirect,
     withRouter,
 )(ProfileContainer);
