@@ -2,11 +2,17 @@ import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 import { Form, Field } from 'react-final-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPosts } from '../../../Redux/profileSelectors';
+import { addPost } from '../../../Redux/profileReducer';
 
 const minLength = (minLength) => (value) =>
     value && value.length > minLength ? undefined : 'Post body cannot be empty';
 
-const MyPosts = ({ posts, addPost }) => {
+const MyPosts = () => {
+    const posts = useSelector(getPosts);
+    const dispatch = useDispatch();
+
     const PostForm = (props) => {
         return (
             <Form
@@ -57,7 +63,7 @@ const MyPosts = ({ posts, addPost }) => {
     ));
 
     const onAddPost = (props) => {
-        addPost(props.postInput);
+        dispatch(addPost(props.postInput));
     };
 
     return (

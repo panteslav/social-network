@@ -1,79 +1,40 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Profile from './Profile';
 import {
-    addPost,
     requestUserProfile,
     requestProfileStatus,
-    updateProfileStatus,
     requestFollowStatus,
-    toggleProfileFollow,
 } from '../../Redux/profileReducer';
 
+import { useLocation, useHistory } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import {
-    getPosts,
-    getProfileData,
-    getProfileStatus,
-    getFollowStatus,
-} from '../../Redux/profileSelectors';
 import { getAuthUserId } from '../../Redux/authSelectors';
-import { getIdsToToggleFollow } from '../../Redux/usersSelectors';
 
-class ProfileContainer extends React.Component {
-    componentDidMount() {
-        let userId = this.props.match.params.userId;
+const ProfileContainer = () => {
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const history = useHistory();
+    const authUserId = useSelector(getAuthUserId);
+    //consider later useNavigate
+    //const navigate = useNavigate();
+    useEffect(() => {
+        let [, , userId] = location.pathname.split('/');
+
         if (!userId) {
-            userId = this.props.userId;
+            userId = authUserId;
             if (!userId) {
-                this.props.history.push('/login');
+                history.push('/login');
+                // navigate('/login');
             }
         }
-        // if (this.props.followed) {
+        dispatch(requestUserProfile(userId));
+        dispatch(requestProfileStatus(userId));
+        dispatch(requestFollowStatus(userId));
+    });
 
-        // }
-        this.props.requestUserProfile(userId);
-        this.props.requestProfileStatus(userId);
-        this.props.requestFollowStatus(userId);
-    }
-
-    render() {
-        return (
-            <Profile
-                profileData={this.props.profileData}
-                profileStatus={this.props.profileStatus}
-                posts={this.props.posts}
-                // userId={this.props.userId}
-                addPost={this.props.addPost}
-                updateProfileStatus={this.props.updateProfileStatus}
-                followed={this.props.followed}
-                idsToToggleFollow={this.props.idsToToggleFollow}
-                toggleFollow={this.props.toggleProfileFollow}
-            />
-        );
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        userId: getAuthUserId(state),
-        posts: getPosts(state),
-        profileData: getProfileData(state),
-        profileStatus: getProfileStatus(state),
-        followed: getFollowStatus(state),
-        idsToToggleFollow: getIdsToToggleFollow(state),
-    };
+    return <Profile />;
 };
 
-export default compose(
-    connect(mapStateToProps, {
-        addPost,
-        updateProfileStatus,
-        requestUserProfile,
-        requestProfileStatus,
-        requestFollowStatus,
-        toggleProfileFollow,
-    }),
-    withRouter,
-)(ProfileContainer);
+export default compose(withRouter)(ProfileContainer);

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUserId } from '../../Redux/authSelectors';
 
 const ProfileStatus = ({ userId, status, updateProfileStatus }) => {
+    const dispatch = useDispatch();
     const authUserId = useSelector(getAuthUserId);
 
     const [isBeingEdited, setIsBeingEdited] = useState(false);
@@ -15,7 +16,7 @@ const ProfileStatus = ({ userId, status, updateProfileStatus }) => {
 
     const deactivateEditMode = () => {
         setIsBeingEdited(false);
-        updateProfileStatus(statusBuffer);
+        dispatch(updateProfileStatus(statusBuffer));
     };
 
     const onStatusInputChange = (e) => {
@@ -42,52 +43,5 @@ const ProfileStatus = ({ userId, status, updateProfileStatus }) => {
         </div>
     );
 };
-
-// class ProfileStatus extends React.Component {
-//     state = {
-//         isBeingEdited: false,
-//         status: props.status,
-//         // hasRightsToEditStatus: props.userId === ,
-//     };
-
-//     activateEditMode = () => {
-//         setState({
-//             isBeingEdited: true,
-//         });
-//     };
-
-//     deactivateEditMode = () => {
-//         setState({
-//             isBeingEdited: false,
-//         });
-//         props.updateProfileStatus(state.status);
-//     };
-
-//     onStatusInputChange = (e) => {
-//         const input = e.target.value;
-//         setState({ status: input });
-//     };
-
-//     render() {
-//         return (
-//             <div onDoubleClick={activateEditMode} onBlur={deactivateEditMode}>
-//                 {state.isBeingEdited ? (
-//                     <div>
-//                         <input
-//                             onChange={onStatusInputChange}
-//                             autoFocus
-//                             type="text"
-//                             defaultValue={props.status}
-//                         ></input>
-//                     </div>
-//                 ) : (
-//                     <div>
-//                         status: <span>{props.status}</span>
-//                     </div>
-//                 )}
-//             </div>
-//         );
-//     }
-// }
 
 export default ProfileStatus;

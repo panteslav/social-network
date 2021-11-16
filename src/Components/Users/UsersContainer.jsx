@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users';
 import { connect } from 'react-redux';
-import { toggleUserFollow, requestUsers } from '../../Redux/usersReducer';
+import { requestUsers } from '../../Redux/usersReducer';
 import Preloader from '../Common/Preloader';
 import {
     getUsers,
@@ -44,7 +44,6 @@ class UsersContainer extends React.Component {
                     currentPageNumber={this.state.currentPageNumber}
                     totalUsersCount={this.props.totalUsersCount}
                     idsToToggleFollow={this.props.idsToToggleFollow}
-                    toggleUserFollow={this.props.toggleUserFollow}
                     onPageChange={this.onPageChange}
                 />
             </>
@@ -61,6 +60,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-    toggleUserFollow,
     requestUsers,
 })(UsersContainer);

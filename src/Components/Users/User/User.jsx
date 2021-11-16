@@ -3,6 +3,7 @@ import s from './User.module.css';
 import defaultUserAvatar from '../../../Assets/Images/default_avatar.jpeg';
 import { NavLink } from 'react-router-dom';
 import FollowButton from '../../Common/FollowButton/FollowButton';
+import { toggleUserFollow } from '../../../Redux/usersReducer';
 
 const User = ({
     id,
@@ -11,8 +12,8 @@ const User = ({
     location,
     followed,
     photos,
-    toggleUserFollow,
-    idsToToggleFollow,
+    // toggleUserFollow,
+    // idsToToggleFollow,
 }) => {
     // const sendToggleFollowRequest = (followed) => {
     //     return followed
@@ -46,7 +47,7 @@ const User = ({
                     <FollowButton
                         followed={followed}
                         id={id}
-                        idsToToggleFollow={idsToToggleFollow}
+                        // idsToToggleFollow={idsToToggleFollow}
                         toggleFollow={toggleUserFollow}
                     />
                 </div>

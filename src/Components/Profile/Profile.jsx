@@ -1,20 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import styles from './Profile.module.css';
 
-const Profile = (props) => {
+const Profile = () => {
     return (
         <div>
-            <ProfileInfo
-                profileData={props.profileData}
-                profileStatus={props.profileStatus}
-                updateProfileStatus={props.updateProfileStatus}
-                followed={props.followed}
-                idsToToggleFollow={props.idsToToggleFollow}
-                toggleFollow={props.toggleFollow}
-            />
-            <MyPosts addPost={props.addPost} posts={props.posts} />
+            <ProfileInfo />
+            <MyPosts />
         </div>
     );
 };

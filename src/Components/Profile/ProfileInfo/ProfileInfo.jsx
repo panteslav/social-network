@@ -4,15 +4,15 @@ import Preloader from '../../Common/Preloader';
 import ProfileStatus from '../../ProfileStatus/ProfileStatus';
 import FollowButton from '../../Common/FollowButton/FollowButton';
 import defaultAvatar from '../../../Assets/Images/default_avatar.jpeg';
+import { useSelector } from 'react-redux';
+import { toggleProfileFollow, updateProfileStatus } from '../../../Redux/profileReducer';
+import { getFollowStatus, getProfileData, getProfileStatus } from '../../../Redux/profileSelectors';
 
-const ProfileInfo = ({
-    profileData,
-    profileStatus,
-    updateProfileStatus,
-    followed,
-    idsToToggleFollow,
-    toggleFollow,
-}) => {
+const ProfileInfo = () => {
+    const profileData = useSelector(getProfileData);
+    const profileStatus = useSelector(getProfileStatus);
+    const followed = useSelector(getFollowStatus);
+
     if (!profileData) {
         return <Preloader />;
     }
@@ -33,12 +33,7 @@ const ProfileInfo = ({
                 <div className={styles.avatar}>
                     <img src={photos.small || defaultAvatar} alt="Profile avatar"></img>
                 </div>
-                <FollowButton
-                    followed={followed}
-                    id={userId}
-                    idsToToggleFollow={idsToToggleFollow}
-                    toggleFollow={toggleFollow}
-                />
+                <FollowButton followed={followed} id={userId} toggleFollow={toggleProfileFollow} />
                 <ul className={styles.info}>
                     User info
                     <li className={styles.infoItem}>Full name: {fullName}</li>
