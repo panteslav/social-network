@@ -1,0 +1,8 @@
+@import './../../index.css';
+
+.container {
+    grid-area: f;
+    min-height: 100px;
+    text-align: center;
+    background-color: var(--main-color-dark);
+}

@@ -4,8 +4,8 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import ProfileContainer from './Components/Profile/ProfileContainer';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import UsersContainer from './Components/Users/UsersContainer';
+import Footer from './Components/Footer/Footer';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import store from './Redux';
 import Login from './Components/Login/Login';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -41,7 +41,7 @@ class App extends React.Component {
                             <Route path="/login" render={() => <Login />} />
                         </Switch>
                     </div>
-                    <footer>footer</footer>
+                    <Footer />
                 </div>
             </BrowserRouter>
         );

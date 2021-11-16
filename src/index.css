@@ -1,5 +1,6 @@
 :root {
     --main-color-dark: #20232a;
+    --main-color-darker: rgb(1, 15, 20);
     --main-color-light: #ffffff;
     --additional-color-light: #61dafb;
     --app-backround-color: rgb(230, 230, 230);
@@ -10,7 +11,7 @@ html {
         'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--app-backround-color);
+    background-color: var(--app-backrgound-color);
 }
 
 body {

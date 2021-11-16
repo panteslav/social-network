@@ -1,6 +1,8 @@
+@import './../../index.css';
+
 .header {
     grid-area: h;
-    background-color: rgb(1, 15, 20);
+    background-color: var(--main-color-darker);
 }
 
 .header img {
